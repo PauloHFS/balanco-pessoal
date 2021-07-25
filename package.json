@@ -1,0 +1,15 @@
+{
+  "name": "balanco-pessoal",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/PauloHFS/balanco-pessoal.git",
+  "author": "Paulo Hernane Fontes e Silva",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.2"
+  }
+}
