@@ -1,6 +1,18 @@
 const database = require("../database/database");
 
+/**
+ * Insere uma nova transação no banco de dados.
+ * 
+ * @param {String} description Descrição da transação.
+ * @param {Number} valor Valor da transação.
+ * @param {Number} owner uid do proprietário da transação.
+ * @param {Number} type Tipo da transação, sendo 1 para GASTO e 2 para RENDA.
+ */
 function insert(description, valor, owner, type) {
+
+    //TODO: verificar os parametros antes de rodar o codigo sql.
+    //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
+
     database.run(`
         INSERT INTO transacoes (
             description,
@@ -23,7 +35,18 @@ function insert(description, valor, owner, type) {
     );
 }
 
+/**
+ * Seleciona todas as transações no banco de dados a partir do id do proprietário.
+ * Aceita uma função callback que permite tratar as transações.
+ * 
+ * @param {Number} owner uid do proprietário, chave primaria do usuário no banco de dados.
+ * @param {function} callback função que recebe todas as transações do proprietário como parametro.
+ */
 function selectAll(owner, callback) {
+
+    //TODO: verificar os paramentros antes que executar a sql.
+    //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
+
     database.all(`
             SELECT * FROM transacoes
             WHERE owner = "${owner}";

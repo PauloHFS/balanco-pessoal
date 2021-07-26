@@ -4,6 +4,9 @@ const Usuario = require("../models/Usuario");
 
 /**
  * Cria uma nova conta de usuario.
+ * 
+ * TODO: identificar situações que podem ocorrer erros e trata-los
+ * ? deve retornar 201 em toda ocasião?
  */
 router.post("/signup", (req, res) => {
     const {
@@ -18,6 +21,8 @@ router.post("/signup", (req, res) => {
 
 /**
  * Entra em uma conta existente.
+ * 
+ * TODO: identificar situações que podem ocorrer erros e trata-los
  */
 router.post("/login", (req, res) => {
     const {

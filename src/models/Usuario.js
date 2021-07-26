@@ -1,6 +1,18 @@
 const database = require("../database/database");
 
+/**
+ * Insere um novo Usuário no banco de dados.
+ * 
+ * @param {String} name Nome do Usuário.
+ * @param {String} email E-mail do Usuário.
+ * @param {String} password Password do Usuário.
+ */
 function insert(name, email, password) {
+
+    //TODO: verificar os paramentros antes que executar a sql.
+    //TODO: impedir que 2 ou mais usuarios possam ter o mesmo email e senha
+    //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
+
     database.run(`
         INSERT INTO usuarios (
             name,
@@ -21,7 +33,17 @@ function insert(name, email, password) {
     );
 }
 
+/**
+ * Seleciona usuário que possui o e-mail e senha passado por parametro.
+ * @param {String} email E-mail do Usuário.
+ * @param {String} password Password do Usuário.
+ * @param {function} callback Função callback que recebe os dados do usuário por parametros se este estiver cadastrado no banco de dados, e undefined se não.
+ */
 function select(email, password, callback) {
+
+    //TODO: verificar os paramentros antes que executar a sql.
+    //TODO: mudar a forma de tratar o erro do database, se possivel, em vez que apenas informa-lo no console.
+
     database.get(`
         SELECT * FROM usuarios
         WHERE email = "${email}"
@@ -31,7 +53,7 @@ function select(email, password, callback) {
                 console.error(err.message);
             } else {
                 console.log(row);
-                callback(row);  
+                callback(row);
             }
         }
     );

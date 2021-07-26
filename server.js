@@ -6,11 +6,6 @@ const server = express();
 const wallet_routes = require("./src/routes/wallet.routes");
 const auth_routes = require("./src/routes/auth.routes");
 
-
-server.get("/", (req, res) => {
-    res.send("Servidor está funcionando");
-});
-
 server.use(session({
         secret: "don't trust, verify!",
         resave: true,
