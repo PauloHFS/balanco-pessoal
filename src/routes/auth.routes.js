@@ -11,7 +11,7 @@ router.post("/signup", (req, res) => {
         password
     } = req.body;
 
-    Usuario.insert(email, email, password)
+    Usuario.insert(email, email, password);
 
     res.sendStatus(201);
 });
@@ -27,6 +27,7 @@ router.post("/login", (req, res) => {
 
     Usuario.select(email, password, (row) => {
         if (row) {
+            req.session.owner = row.uid;
             res.sendStatus(200);
         } else {
             res.sendStatus(401)

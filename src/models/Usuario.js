@@ -30,6 +30,7 @@ function select(email, password, callback) {
             if (err) {
                 console.error(err.message);
             } else {
+                console.log(row);
                 callback(row);  
             }
         }

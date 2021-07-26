@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 
 const server = express();
 
@@ -10,7 +11,12 @@ server.get("/", (req, res) => {
     res.send("Servidor está funcionando");
 });
 
-server.use(express.json())
+server.use(session({
+        secret: "don't trust, verify!",
+        resave: true,
+        saveUninitialized: true
+    }))
+    .use(express.json())
     .use("/auth", auth_routes)
     .use("/wallet", wallet_routes)
     .listen(3333, () => {

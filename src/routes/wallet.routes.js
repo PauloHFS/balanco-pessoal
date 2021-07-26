@@ -6,7 +6,7 @@ const Transacao = require("../models/Transacao");
  * Retorna todos os gastos do usuário.
  */
 router.get("/", (req, res) => {
-    Transacao.selectAll(1, (data) => {
+    Transacao.selectAll(req.session.owner, (data) => {
         res.status(200)
         res.send(data);
     })
@@ -21,7 +21,7 @@ router.post("/deposit", (req, res) => {
         valor
     } = req.body;
 
-    Transacao.insert(descrição, valor, 1, 1);
+    Transacao.insert(descrição, valor, req.session.owner, 1);
 
     res.sendStatus(201);
 
@@ -36,7 +36,7 @@ router.post("/withdraw", (req, res) => {
         valor
     } = req.body;
 
-    Transacao.insert(descrição, valor, 1, 2);
+    Transacao.insert(descrição, valor, req.session.owner, 2);
 
     res.sendStatus(201);
 
