@@ -1,5 +1,5 @@
 const express = require("express");
-const Transacao = require("../models/Transacao");
+const Transacao = require("../controllers/TransacaoController");
 
 const router = express.Router();
 

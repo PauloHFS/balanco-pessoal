@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Usuario = require("../models/Usuario");
+const Usuario = require("../controllers/UsuarioController");
 
 /**
  * Cria uma nova conta de usuario.
