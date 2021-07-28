@@ -5,22 +5,20 @@ const router = express.Router();
 
 /**
  * Retorna todos os gastos do usuário.
- * 
- * TODO: tratar situações que podem gerar erros e tratar esses erros.
- * ? está retornando codigo 200 em toda possibilidade?
  */
 router.get("/", (req, res) => {
-    Transacao.selectAll(req.session.owner, (data) => {
-        res.status(200)
-        res.send(data);
-    })
+    if (req.session.owner != undefined) {
+        Transacao.selectAll(req.session.owner, (data) => {
+            res.status(200)
+            res.send(data);
+        });
+    } else {
+        res.sendStatus(400);
+    }
 });
 
 /**
  * Adiciona uma nova renda ao usuário.
- * 
- * TODO: identificar situações que podem ocorrer erros e trata-los
- * ? deve retornar 201 em toda ocasião?
  */
 router.post("/deposit", (req, res) => {
     const {
@@ -28,17 +26,16 @@ router.post("/deposit", (req, res) => {
         valor
     } = req.body;
 
-    Transacao.insert(descrição, valor, req.session.owner, 2);
-
-    res.sendStatus(201);
-
+    if (req.session.owner != undefined && Transacao.isValida(descrição, valor)) {
+        Transacao.insert(descrição, valor, req.session.owner, 2);
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(400);
+    }
 });
 
 /**
  * Adiciona um novo gasto ao usuário.
- * 
- * TODO: identificar situações que podem ocorrer erros e trata-los
- * ? deve retornar 201 em toda ocasião?
  */
 router.post("/withdraw", (req, res) => {
     const {
@@ -46,10 +43,12 @@ router.post("/withdraw", (req, res) => {
         valor
     } = req.body;
 
-    Transacao.insert(descrição, valor, req.session.owner, 1);
-
-    res.sendStatus(201);
-
+    if (req.session.owner != undefined && Transacao.isValida(descrição, valor)) {
+        Transacao.insert(descrição, valor, req.session.owner, 1);
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(400);
+    }
 });
 
 module.exports = router;

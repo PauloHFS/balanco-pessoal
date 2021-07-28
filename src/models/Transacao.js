@@ -10,7 +10,6 @@ const database = require("../database/database");
  */
 function insert(description, valor, owner, type) {
 
-    //TODO: verificar os parametros antes de rodar o codigo sql.
     //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
 
     database.run(`
@@ -44,8 +43,7 @@ function insert(description, valor, owner, type) {
  */
 function selectAll(owner, callback) {
 
-    //TODO: verificar os paramentros antes que executar a sql.
-    //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
+    //TODO: mudar a forma de tratar o erro do database, se possivel, em vez que apenas informa-lo no console.
 
     database.all(`
             SELECT * FROM transacoes
@@ -61,7 +59,21 @@ function selectAll(owner, callback) {
     );
 }
 
+function isValida(description, valor) {
+    let isValida = false;
+
+    let isUndefined = description == undefined || valor == undefined;
+    let isNull = description == null || valor == null;
+
+    if (!isUndefined && !isNull) {
+        isValida = true;
+    }
+
+    return isValida;
+}
+
 module.exports = {
     insert,
-    selectAll
+    selectAll,
+    isValida
 }
