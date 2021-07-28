@@ -7,7 +7,6 @@ const Usuario = require("../controllers/UsuarioController");
  */
 router.post("/signup", (req, res) => {
 
-    //TODO: identificar situações que podem ocorrer erros e trata-los
     //! devido aos requisitos do projeto sobre a rota, estou usando o email como nome do usuario pois é só isso que e passado no corpo da requisição.
 
     const {
@@ -35,7 +34,6 @@ router.post("/signup", (req, res) => {
  */
 router.post("/login", (req, res) => {
 
-    //TODO: identificar situações que podem ocorrer erros e trata-los
     //? é a melhor forma de implementar essa autenticação?
 
     const {
@@ -43,7 +41,6 @@ router.post("/login", (req, res) => {
         password
     } = req.body;
 
-    //TODO: reafazer a logica desse if, aparenta não está cobrindo uma situação.
     if (req.session.owner != undefined || !Usuario.isValido(email, email, password)) {
         res.sendStatus(401);
 
