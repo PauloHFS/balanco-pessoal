@@ -6,6 +6,7 @@
   "author": "Paulo Hernane Fontes e Silva",
   "license": "MIT",
   "scripts": {
+    "resetDatabase": "rm -rf src/database/balanco.sqlite",
     "dev": "nodemon server.js"
   },
   "dependencies": {
