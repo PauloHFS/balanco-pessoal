@@ -1,23 +1,28 @@
 const express = require("express");
 const router = express.Router();
-const Usuario = require("../models/Usuario");
+const Usuario = require("../controllers/UsuarioController");
 
 /**
  * Cria uma nova conta de usuario.
- * 
- * TODO: identificar situações que podem ocorrer erros e trata-los
- * ? deve retornar 201 em toda ocasião?
- * ! devido aos requisitos do projeto sobre a rota, estou usando o email como nome do usuario pois é só isso que e passado no corpo da requisição.
  */
 router.post("/signup", (req, res) => {
+
+    //! devido aos requisitos do projeto sobre a rota, estou usando o email como nome do usuario pois é só isso que e passado no corpo da requisição.
+
     const {
         email,
         password
     } = req.body;
 
     if (Usuario.isValido(email, email, password)) {
-        Usuario.insert(email, email, password);
-        res.sendStatus(201);
+        Usuario.select(email, password, (row) => {
+            if (row == undefined) {
+                Usuario.insert(email, email, password);
+                res.sendStatus(201);
+            } else {
+                res.sendStatus(409);
+            }
+        });
     } else {
         res.sendStatus(400);
     }
@@ -26,11 +31,10 @@ router.post("/signup", (req, res) => {
 
 /**
  * Entra em uma conta existente caso não tenha nenhum usuário autenticado ainda.
- * 
- * TODO: identificar situações que podem ocorrer erros e trata-los
- * ? é a melhor forma de implementar essa autenticação?
  */
 router.post("/login", (req, res) => {
+
+    //? é a melhor forma de implementar essa autenticação?
 
     const {
         email,

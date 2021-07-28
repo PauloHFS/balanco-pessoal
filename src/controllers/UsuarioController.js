@@ -9,8 +9,6 @@ const database = require("../database/database");
  */
 function insert(name, email, password) {
 
-    //TODO: verificar os paramentros antes que executar a sql.
-    //TODO: impedir que 2 ou mais usuarios possam ter o mesmo email e senha
     //TODO: mudar a forma de tratar o erro do databse, se possivel, em vez que apenas informa-lo no console.
 
     database.run(`
@@ -41,7 +39,6 @@ function insert(name, email, password) {
  */
 function select(email, password, callback) {
 
-    //TODO: verificar os paramentros antes que executar a sql.
     //TODO: mudar a forma de tratar o erro do database, se possivel, em vez que apenas informa-lo no console.
 
     database.get(`
@@ -52,7 +49,6 @@ function select(email, password, callback) {
             if (err) {
                 console.error(err.message);
             } else {
-                console.log(row);
                 callback(row);
             }
         }
