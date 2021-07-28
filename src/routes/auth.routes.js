@@ -21,10 +21,9 @@ router.post("/signup", (req, res) => {
 });
 
 /**
- * Entra em uma conta existente.
+ * Entra em uma conta existente caso não tenha nenhum usuário autenticado ainda.
  * 
  * TODO: identificar situações que podem ocorrer erros e trata-los
- * TODO: impedir login quando um usuário já esta autenticado.
  */
 router.post("/login", (req, res) => {
 
@@ -48,6 +47,9 @@ router.post("/login", (req, res) => {
     }
 });
 
+/**
+ * Encerra a sessão do usuário caso esse estaja autenticado.
+ */
 router.post("/logout", (req, res) => {
     if (req.session.owner != undefined) {
         req.session.owner = undefined;

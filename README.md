@@ -21,6 +21,7 @@ Este é um projeto desenvolvido para avaliação na fase 2 do processo seletivo 
 | :--------------: | :----------------------------------------------------------: | --------------------------------------------------------- |
 |   /auth/login    | Rota utliziada pra autenticar o usuário. <br />Recebe e-mail e senha no corpo da requisição. | `{"email": "exemplo@exemplo.com", "password": "exemplo"}` |
 |   /auth/signup   | Realiza o cadastro de um novo usuário.<br />Recebe e-mail e senha no corpo da requisição. | `{"email": "exemplo@exemplo.com", "password": "exemplo"}` |
+|   /auth/logout   | Efetua o logout do usuário que está autenticado no momento.  |                                                           |
 |     /wallet      | Exibe todas as transações de gasto e de renda do usuário autenticado.<br />É necessário está autenticado para fazer requisições nesta rota. |                                                           |
 | /wallet/deposit  | Registra uma nova renda na wallet do usuário autenticado.<br />Recebe a descrição e o valor da renda no corpo da requisição.<br />É necessário está autenticado para fazer requisições nesta rota. | `{"descrição": "exemplo de renda", "valor": 150}`         |
 | /wallet/withdraw | Registra um novo gasto na wallet do usuário autenticado.<br />Recebe a descrição e o valor do gasto no corpo da requisição.<br />É necessário está autenticado para fazer requisições nesta rota. | `{"descrição": "exemplo de gasto", "valor": 150}`         |
@@ -28,6 +29,8 @@ Este é um projeto desenvolvido para avaliação na fase 2 do processo seletivo 
 #### Tabelas do banco de dados
 
 ##### Usuários
+
+Tabela que armazena os usuários cadastrados.
 
 | Atributo | Descrição                                                    |
 | :------: | :----------------------------------------------------------- |
@@ -37,6 +40,8 @@ Este é um projeto desenvolvido para avaliação na fase 2 do processo seletivo 
 | password | Senha o Usuário, é utilizado para autentica-lo.              |
 
 ##### Transações
+
+Tabela que armazena as transações, seja uma renda ou um gasto.
 
 |  Atributo   | Descrição                                                    |
 | :---------: | ------------------------------------------------------------ |
