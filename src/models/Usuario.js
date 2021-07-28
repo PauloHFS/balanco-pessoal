@@ -59,7 +59,32 @@ function select(email, password, callback) {
     );
 }
 
+/**
+ * Verifica se os dados são validos para a criação de um novo usuário.
+ * A validade depende da regra de negócio.
+ * 
+ * @param {String} name Nome do Usuário
+ * @param {String} email Email do Usuário
+ * @param {String} password Senha do Usuário
+ * @returns true se for valido, false se não.
+ */
+function isValido(name, email, password) {
+    let isValido = false;
+
+    //verifica se algum parametro é undefined
+    let isUndefined = name == undefined || email == undefined || password == undefined;
+    //verifica se algum parametro é nulo
+    let isNull = name == null || email == null || email == null;
+
+    if (!isUndefined && !isNull) {
+        isValido = true;
+    }
+
+    return isValido;
+}
+
 module.exports = {
     insert,
-    select
+    select,
+    isValido
 }

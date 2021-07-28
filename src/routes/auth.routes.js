@@ -15,31 +15,53 @@ router.post("/signup", (req, res) => {
         password
     } = req.body;
 
-    Usuario.insert(email, email, password);
+    if (Usuario.isValido(email, email, password)) {
+        Usuario.insert(email, email, password);
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(400);
+    }
 
-    res.sendStatus(201);
 });
 
 /**
- * Entra em uma conta existente.
+ * Entra em uma conta existente caso não tenha nenhum usuário autenticado ainda.
  * 
  * TODO: identificar situações que podem ocorrer erros e trata-los
- * TODO: impedir login 
+ * ? é a melhor forma de implementar essa autenticação?
  */
 router.post("/login", (req, res) => {
+
     const {
         email,
         password
     } = req.body;
 
-    Usuario.select(email, password, (row) => {
-        if (row) {
-            req.session.owner = row.uid;
-            res.sendStatus(200);
-        } else {
-            res.sendStatus(401)
-        }
-    });
+    if (req.session.owner != undefined || !Usuario.isValido(email, email, password)) {
+        res.sendStatus(401);
+
+    } else {
+        Usuario.select(email, password, (row) => {
+            if (row) {
+                req.session.owner = row.uid;
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(401)
+            }
+        });
+    }
+});
+
+/**
+ * Encerra a sessão do usuário caso esse estaja autenticado.
+ */
+router.post("/logout", (req, res) => {
+    if (req.session.owner != undefined) {
+        req.session.owner = undefined;
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 module.exports = router;
