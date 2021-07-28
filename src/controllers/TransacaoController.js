@@ -59,6 +59,13 @@ function selectAll(owner, callback) {
     );
 }
 
+/**
+ * Valida os dados da transação.
+ * 
+ * @param {String} description Descrição do gasto ou da renda.
+ * @param {Number} valor Valor do gosto ou renda.
+ * @returns true se for valida, false se não.
+ */
 function isValida(description, valor) {
     let isValida = false;
 
