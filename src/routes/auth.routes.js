@@ -15,15 +15,20 @@ router.post("/signup", (req, res) => {
         password
     } = req.body;
 
-    Usuario.insert(email, email, password);
+    if (Usuario.isValido(email, email, password)) {
+        Usuario.insert(email, email, password);
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(400);
+    }
 
-    res.sendStatus(201);
 });
 
 /**
  * Entra em uma conta existente caso não tenha nenhum usuário autenticado ainda.
  * 
  * TODO: identificar situações que podem ocorrer erros e trata-los
+ * ? é a melhor forma de implementar essa autenticação?
  */
 router.post("/login", (req, res) => {
 
@@ -32,7 +37,7 @@ router.post("/login", (req, res) => {
         password
     } = req.body;
 
-    if (req.session.owner != undefined || email == undefined || password == undefined) {
+    if (req.session.owner != undefined || !Usuario.isValido(email, email, password)) {
         res.sendStatus(401);
 
     } else {
