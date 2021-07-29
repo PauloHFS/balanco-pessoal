@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Usuario = require("../controllers/UsuarioController");
+const UsuarioController = require("../controllers/UsuarioController");
 
 /**
  * Cria uma nova conta de usuario.
@@ -14,10 +14,10 @@ router.post("/signup", (req, res) => {
         password
     } = req.body;
 
-    if (Usuario.isValido(email, email, password)) {
-        Usuario.select(email, password, (row) => {
+    if (UsuarioController.isValido(email, email, password)) {
+        UsuarioController.select(email, password, (row) => {
             if (row == undefined) {
-                Usuario.insert(email, email, password);
+                UsuarioController.insert(email, email, password);
                 res.sendStatus(201);
             } else {
                 res.sendStatus(409);
@@ -41,11 +41,10 @@ router.post("/login", (req, res) => {
         password
     } = req.body;
 
-    if (req.session.owner != undefined || !Usuario.isValido(email, email, password)) {
-        res.sendStatus(401);
-
+    if (!UsuarioController.isValido(email, email, password)) {
+        res.sendStatus(400);
     } else {
-        Usuario.select(email, password, (row) => {
+        UsuarioController.select(email, password, (row) => {
             if (row) {
                 req.session.owner = row.uid;
                 res.sendStatus(200);

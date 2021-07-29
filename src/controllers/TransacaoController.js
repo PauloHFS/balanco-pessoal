@@ -79,6 +79,7 @@ function isValida(description, valor) {
     return isValida;
 }
 
+
 module.exports = {
     insert,
     selectAll,
