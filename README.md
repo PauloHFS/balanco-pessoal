@@ -8,12 +8,13 @@ Este é um projeto desenvolvido para avaliação na fase 2 do processo seletivo 
 
 #### Primeiros Passos
 
-1. Clone o repositório e acesse o diretório **balanco-pessoal**.
-2. Execute no terminal:
-   1. **`yarn`** **Este comando irá instalar todas as dependência do projeto.*
+1. Instale as dependências do projeto: **Node.Js** e **Yarn**
+2. Clone o repositório e acesse o diretório **balanco-pessoal**.
+3. Execute no terminal:
+   1. **`yarn`** **Este comando irá instalar todas as dependências do projeto.*
    2. **`yarn dev`** **Este comando irá executar o servidor*
 
-*Obs: As requesições que utilizei para testar a API no Insomnia pode ser encontrada [aqui](https://gist.github.com/PauloHFS/835bec88e0ea02ba5ebcfad5a7c3a0ba). Basta importar elas.*
+*Obs: As requisições que utilizei para testar a API no Insomnia pode ser encontrada [aqui](https://gist.github.com/PauloHFS/835bec88e0ea02ba5ebcfad5a7c3a0ba). Basta importar elas.*
 
 #### Rotas da API
 
